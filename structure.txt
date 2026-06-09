@@ -1,0 +1,9 @@
+MiLenguajeEducativo (Solución)
+├── 1. Gramatica/
+│     └── Lenguaje.g4        <- Tu archivo de ANTLR (Sintaxis)
+├── 2. Compiler.Core/
+│     ├── TablaSimbolos.cs   <- Guarda las variables y sus tipos (int, string)
+│     ├── TypeChecker.cs     <- Tu código que valida que no sumen peras con manzanas
+│     └── CodeGenerator.cs   <- Traduce el árbol a código ejecutable o C#
+└── 3. Compiler.CLI/
+      └── Program.cs         <- La consola que el alumno ejecuta (ej: "mivocal run main.edu")
