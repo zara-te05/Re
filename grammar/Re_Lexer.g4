@@ -9,7 +9,6 @@ RETURN   : 'return';
 FUNCTION : 'function';
 
 // === TYPES ===
-LET         : 'let';
 VAR         : 'var';
 INT_TYPE    : 'int';
 DOUBLE_TYPE : 'double';
@@ -27,12 +26,16 @@ PLUS   : '+';
 MINUS  : '-';
 MULT   : '*';
 DIV    : '/';
+EXP    : '^';
+RAIZ   : 'sqrt';
 ASSIGN : '=';
+
 
 // === LOGIC OPERATORS ===
 AND_KW : 'and' ;
 OR_KW  : 'or' ;
 NOT_KW : 'not' ;
+
 AND_OP : '&&' ;
 OR_OP  : '||' ;
 NOT_OP : '!' ;
@@ -56,6 +59,15 @@ LBRACE   : '{' ;
 RBRACE   : '}' ;
 LBRACKET : '[' ;
 RBRACKET : ']' ;
+
+// == LENGUGE ==
+IF : 'if';
+ELSE : 'else';
+ELSE_IF : 'else if';
+FOR : 'for';
+FOREACH : 'foreach';
+WHILE : 'while';
+DO_WHILE : 'do while'
 
 // === LITERALS ===
 INT    : [0-9]+ ;
