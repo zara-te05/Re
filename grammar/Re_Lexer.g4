@@ -16,8 +16,8 @@ LONG_TYPE   : 'long';
 SHORT_TYPE  : 'short';
 BOOL_TYPE   : 'bool';
 STRING_TYPE : 'string';
-ARRAY_TYPE  : 'array';
-LIST_TYPE   : 'List';
+ARRAY_TYPE  : 'array'; // Cambiado a palabra clave para usar array<T>
+LIST_TYPE   : 'list';
 QUEUE       : 'queue'; 
 STACK       : 'stack';
 
@@ -27,11 +27,9 @@ MINUS  : '-';
 MULT   : '*';
 DIV    : '/';
 EXP    : '^';
-RAIZ   : 'sqrt';
 ASSIGN : '=';
 
-
-// === LOGIC OPERATORS ===
+// === LOGIC OPERATORS (Clásicos y Python) ===
 AND_KW : 'and' ;
 OR_KW  : 'or' ;
 NOT_KW : 'not' ;
@@ -42,12 +40,13 @@ NOT_OP : '!' ;
 IN     : 'in' ;
 
 // === COMPARISON OPERATORS ===
-EQ  : '==' ;
-NEQ : '!=' ;
-GTE : '>=' ;
-LTE : '<=' ;
-GT  : '>' ;
-LT  : '<' ;
+EQ     : '==' ;
+NEQ    : '!=' ;
+GTE    : '>=' ;
+LTE    : '<=' ;
+GT     : '>' ;
+LT     : '<' ;
+DOTDOT : '..' ;
 
 // === PUNCTUATION ===
 COLON    : ':' ;
@@ -60,19 +59,17 @@ RBRACE   : '}' ;
 LBRACKET : '[' ;
 RBRACKET : ']' ;
 
-// == LENGUGE ==
-IF : 'if';
-ELSE : 'else';
-ELSE_IF : 'else if';
-FOR : 'for';
-FOREACH : 'foreach';
+// === CONTROL FLOW ===
+IF    : 'if';
+ELSE  : 'else';
+FOR   : 'for';
 WHILE : 'while';
-DO_WHILE : 'do while'
+DO    : 'do';
 
 // === LITERALS ===
 INT    : [0-9]+ ;
 DOUBLE : [0-9]+ '.' [0-9]+ | '.' [0-9]+ ;
-STRING : '"' .*? '"';
+STRING : '"' .*? '"' ;
 BOOL   : 'true' | 'false';
 
 ID : [a-zA-Z_][a-zA-Z0-9_]* ;

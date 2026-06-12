@@ -1,90 +1,131 @@
 parser grammar Re_Parser;
 
 options {
-    tokenVocab = Re_Lexer; // This part is the responsible for linking with the Lexer
+    tokenVocab = Re_Lexer;
 }
 
-// Start
-
-
+// === REGLA INICIAL ===
 program
-    : PROGRAM ID LBRACE sentence* RBRACE
+    : PROGRAM ID LBRACE (sentence | function_decl)* RBRACE
     ;
 
-// Rule for agrup diferents types of sentences
+// === FUNCIONES ===
+function_decl
+    : (type_specifier | VOID) ID LPAREN param_list? RPAREN LBRACE sentence* RBRACE
+    ;
+
+param_list
+    : type_specifier ID (COMMA type_specifier ID)*
+    ;
+
+// === ESTRUCTURAS DE CONTROL Y SENTENCIAS ===
 sentence
     : var_decl
     | var_assign
-    | print_statement
+    | print_statement 
     | if_statement
-    | while_statment
+    | while_statement
     | do_while_statement
     | for_statement
-    | foreach_statement
+    | return_statement
+    | function_call SEMI
     ;
 
-//Example: print(x);
 print_statement
-    : PRINT LPAREN ID RPAREN SEMI 
-    | PRINT LPAREN RPAREN SEMI
+    : PRINT LPAREN expression? RPAREN SEMI 
     ;
 
-// Basic structure for the declarations
-// Estructura basica para generar una declaracion
 var_decl
-    : type_specifier ID (ASSIGN math_expresions)? SEMI 
+    : (type_specifier | VAR) ID (ASSIGN expression)? SEMI 
     ;
 
 var_assign
-    : ID ASSIGN math_expresions SEMI
+    : ID ASSIGN expression SEMI
     ;
 
-// Estructura basica bajo la cual determinamos las declaraciones "legales"
-// En este caso, solo INT, DOUBLE, STRING y BOOL son legales
-// In this case only INT, DOUBLE, STRING and BOOL are legals
+return_statement
+    : RETURN expression? SEMI
+    ;
+
+// === TIPOS DE DATOS ===
 type_specifier
-    : INT_TYPE | DOUBLE_TYPE | STRING_TYPE | BOOL_TYPE
+    : primitive_type
+    | list_type
+    | array_type
+    | collection_type
     ;
 
-//Esta parte genere nuestras reglas para realizar operaciones matematicas simples
-math_expresions
-    : ID
+primitive_type
+    : INT_TYPE | DOUBLE_TYPE | LONG_TYPE | SHORT_TYPE | STRING_TYPE | BOOL_TYPE
+    ;
+
+list_type
+    : LIST_TYPE LT primitive_type GT
+    ;   
+
+array_type 
+    : ARRAY_TYPE LT primitive_type GT  // Cambiado a: array<int> en lugar de int[]
+    ;
+
+collection_type
+    : (QUEUE | STACK) LT primitive_type GT
+    ;
+
+// === EXPRESIONES (Precedencia de ANTLR4) ===
+expression
+    : expression (OR_KW | OR_OP) expression
+    | expression (AND_KW | AND_OP) expression
+    | expression (GTE | GT | LTE | LT | EQ | NEQ) expression
+    | expression (PLUS | MINUS) expression
+    | expression (MULT | DIV) expression
+    | <assoc=right> expression EXP expression 
+    | (NOT_KW | NOT_OP) expression            // Sube aquí (Mayor prioridad que binarios)
+    | MINUS expression                        // Sube aquí (El menos unario, ej: -5)
+    | LPAREN expression RPAREN                
     | literal
-    | LPAREN math_expresions RPAREN 
-    | math_expresions (EXP | RAIZ) math_expresions
-    | math_expresions (MULT | DIV) math_expresions
-    | math_expresions (PLUS | MINUS) math_expresions
+    | ID
+    | function_call
+    | ID LBRACKET expression RBRACKET         
+    ;
+function_call
+    : ID LPAREN argument_list? RPAREN
+    ;
+
+argument_list
+    : expression (COMMA expression)*
     ;
 
 literal
     : INT | DOUBLE | STRING | BOOL
     ;
 
-comparative_expresions
-    : math_expresions (GTE | GT | LTE | LT | EQ | NEQ ) math_expresions
-    | BOOL
-    | ID
-    ;
-
-
-logical_expresions
-    : logical_expresions (OR_KW | OR_OP) logical_expresions
-    | logical_expresions (AND_KW | AND_OP) logical_expresions
-    | (NOT_KW | NOT_OP) logical_expresions
-    | comparative_expresions
-    ;
-
-/*
-    The structure for the if in Re Lenguage is 
-    if(...)
-    {
-    
-    }
-    else{
-    
-    }
-*/
-
+// === CONDICIONAL IF ===
+// CORREGIDO: 'else if' se maneja como ELSE IF, no como un solo token
 if_statement
-    : IF LPAREN logical_expresions RPAREN LBRACE sentence* RBRACE
+    : IF LPAREN expression RPAREN LBRACE sentence* RBRACE 
+      (ELSE IF LPAREN expression RPAREN LBRACE sentence* RBRACE)*
+      (ELSE LBRACE sentence* RBRACE)?
+    ;
 
+// === BUCLES ===
+while_statement
+    : WHILE LPAREN expression RPAREN (LBRACE sentence* RBRACE | sentence)
+    ;
+
+do_while_statement
+    : DO LBRACE sentence* RBRACE WHILE LPAREN expression RPAREN SEMI
+    ;
+
+for_statement
+    : FOR ID IN for_expression (LBRACE sentence* RBRACE | sentence)
+    ;
+
+for_expression
+    : expression DOTDOT expression       
+    | LBRACKET list_elements? RBRACKET   
+    | ID                                 
+    ;
+
+list_elements
+    : expression (COMMA expression)*     
+    ;
