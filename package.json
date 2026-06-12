@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-lexer": "npx antlr4ts-cli -o src/compiler.core grammar/Re_Lexer.g4",
-    "build-parser": "npx antlr4ts-cli -visitor -o src/compiler.core grammar/Re_Parser.g4",
-    "build-grammar": "npm run build-lexer && npm run build-parser"
+    "build-lexer": "cd grammar && npx antlr4ts-cli -o ../src/compiler.core Re_Lexer.g4",
+    "build-parser": "cd grammar && npx antlr4ts-cli -visitor -o ../src/compiler.core Re_Parser.g4",
+    "build-grammar": "npm run build-lexer && npm run build-parser",
+    "start": "tsc && node dist/compiler.cli/index.js"
   },
   "repository": {
     "type": "git",

@@ -3,9 +3,11 @@
     // Environment Settings
     "module": "nodenext",
     "target": "esnext",
+    "rootDir": "./src",
     "types": [],
 
     // Other Outputs
+    "outDir": "./dist",
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
