@@ -1,10 +1,10 @@
 # Re Language
 
-**Re** es un lenguaje de programación interpretado con **fines educativos**. Su objetivo principal es ofrecer una sintaxis limpia, fácil y legible (inspirada en la simplicidad de **Python**), pero combinada con el rigor, la seguridad y el diseño de lenguajes de tipado fuerte como **C#** y **Java**. 
+**Re** es un lenguaje de programación interpretado con **fines educativos**. El objetivo con el que fue concebido es el poder ofrecer una sintaxis limpia, fácil,legible y sobre todo, que sea divertida de codificar para alumnos y personas que empiezan en el mundo de la programacion (inspirada en la simplicidad de **Python**), pero combinada con la estructura, la seguridad y el diseño de lenguajes de tipado fuerte como lo son **C#** y **Java**. 
 
-Está construido utilizando **Node.js** y **TypeScript**, y utiliza **ANTLR4** para el análisis léxico y sintáctico (parsing). El lenguaje es ideal para aprender conceptos de programación estructurada, estructuras de datos y análisis estático.
+Está construido sobre **Node.js** y **TypeScript**, y utiliza **ANTLR4** para el análisis léxico y sintáctico (parsing). El lenguaje intento, sea ideal para aprender conceptos de programación estructurada, estructuras de datos y análisis estático.
 
-## ✨ Características Principales
+## Sus Características Principales:
 
 ### 1. Sistema de Tipos Fuerte y Estático
 Re detecta errores antes de ejecutar el código gracias a su analizador estático (`TypeChecker`). 
@@ -38,7 +38,7 @@ Los strings son objetos de primera clase con métodos útiles integrados: `.uppe
 
 ---
 
-## 📖 Sintaxis y Ejemplos de Código
+## Sintaxis y Ejemplos de Código:
 
 Todo programa en Re debe estar contenido dentro de un bloque `program`. 
 
@@ -115,7 +115,7 @@ program Logica {
 
 ---
 
-## 🛠️ Requisitos e Instalación
+## Requisitos e Instalación
 
 Para compilar y ejecutar el proyecto necesitas tener **Node.js** y **npm** instalados.
 
