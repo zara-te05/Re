@@ -8,6 +8,7 @@ import { Function_declContext } from "./Re_Parser";
 import { Param_listContext } from "./Re_Parser";
 import { SentenceContext } from "./Re_Parser";
 import { Print_statementContext } from "./Re_Parser";
+import { Input_statementContext } from "./Re_Parser";
 import { Var_declContext } from "./Re_Parser";
 import { Var_assignContext } from "./Re_Parser";
 import { Return_statementContext } from "./Re_Parser";
@@ -18,6 +19,7 @@ import { Array_typeContext } from "./Re_Parser";
 import { Collection_typeContext } from "./Re_Parser";
 import { ExpressionContext } from "./Re_Parser";
 import { Function_callContext } from "./Re_Parser";
+import { Method_callContext } from "./Re_Parser";
 import { Argument_listContext } from "./Re_Parser";
 import { LiteralContext } from "./Re_Parser";
 import { If_statementContext } from "./Re_Parser";
@@ -70,6 +72,13 @@ export interface Re_ParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitPrint_statement?: (ctx: Print_statementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `Re_Parser.input_statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInput_statement?: (ctx: Input_statementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `Re_Parser.var_decl`.
@@ -140,6 +149,13 @@ export interface Re_ParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitFunction_call?: (ctx: Function_callContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `Re_Parser.method_call`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMethod_call?: (ctx: Method_callContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `Re_Parser.argument_list`.

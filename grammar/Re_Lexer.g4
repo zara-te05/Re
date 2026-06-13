@@ -5,6 +5,7 @@ PROGRAM  : 'program';
 STATIC   : 'static';
 VOID     : 'void';
 PRINT    : 'print';
+INPUT    : 'input';
 RETURN   : 'return';
 FUNCTION : 'function';
 
@@ -29,6 +30,12 @@ DIV    : '/';
 EXP    : '^';
 ASSIGN : '=';
 
+// === COMPOUND ASSIGNMENT OPERATORS ===
+PLUS_ASSIGN  : '+=' ;
+MINUS_ASSIGN : '-=' ;
+MULT_ASSIGN  : '*=' ;
+DIV_ASSIGN   : '/=' ;
+
 // === LOGIC OPERATORS (Clásicos y Python) ===
 AND_KW : 'and' ;
 OR_KW  : 'or' ;
@@ -49,6 +56,7 @@ LT     : '<' ;
 DOTDOT : '..' ;
 
 // === PUNCTUATION ===
+DOT      : '.' ;
 COLON    : ':' ;
 SEMI     : ';' ;
 COMMA    : ',' ;
@@ -76,3 +84,7 @@ ID : [a-zA-Z_][a-zA-Z0-9_]* ;
 
 // === WHITE SPACE ===
 WS : [ \t\r\n]+ -> skip;
+
+// === COMENTARIOS ===
+LINE_COMMENT  : '//' ~[\r\n]* -> skip;
+BLOCK_COMMENT : '/*' .*? '*/' -> skip;

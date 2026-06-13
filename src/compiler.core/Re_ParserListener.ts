@@ -8,6 +8,7 @@ import { Function_declContext } from "./Re_Parser";
 import { Param_listContext } from "./Re_Parser";
 import { SentenceContext } from "./Re_Parser";
 import { Print_statementContext } from "./Re_Parser";
+import { Input_statementContext } from "./Re_Parser";
 import { Var_declContext } from "./Re_Parser";
 import { Var_assignContext } from "./Re_Parser";
 import { Return_statementContext } from "./Re_Parser";
@@ -18,6 +19,7 @@ import { Array_typeContext } from "./Re_Parser";
 import { Collection_typeContext } from "./Re_Parser";
 import { ExpressionContext } from "./Re_Parser";
 import { Function_callContext } from "./Re_Parser";
+import { Method_callContext } from "./Re_Parser";
 import { Argument_listContext } from "./Re_Parser";
 import { LiteralContext } from "./Re_Parser";
 import { If_statementContext } from "./Re_Parser";
@@ -87,6 +89,17 @@ export interface Re_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitPrint_statement?: (ctx: Print_statementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `Re_Parser.input_statement`.
+	 * @param ctx the parse tree
+	 */
+	enterInput_statement?: (ctx: Input_statementContext) => void;
+	/**
+	 * Exit a parse tree produced by `Re_Parser.input_statement`.
+	 * @param ctx the parse tree
+	 */
+	exitInput_statement?: (ctx: Input_statementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `Re_Parser.var_decl`.
@@ -197,6 +210,17 @@ export interface Re_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFunction_call?: (ctx: Function_callContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `Re_Parser.method_call`.
+	 * @param ctx the parse tree
+	 */
+	enterMethod_call?: (ctx: Method_callContext) => void;
+	/**
+	 * Exit a parse tree produced by `Re_Parser.method_call`.
+	 * @param ctx the parse tree
+	 */
+	exitMethod_call?: (ctx: Method_callContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `Re_Parser.argument_list`.

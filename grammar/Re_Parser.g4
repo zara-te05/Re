@@ -23,16 +23,22 @@ sentence
     : var_decl
     | var_assign
     | print_statement 
+    | input_statement
     | if_statement
     | while_statement
     | do_while_statement
     | for_statement
     | return_statement
     | function_call SEMI
+    | method_call SEMI
     ;
 
 print_statement
     : PRINT LPAREN expression? RPAREN SEMI 
+    ;
+
+input_statement
+    : ID ASSIGN INPUT LPAREN STRING? RPAREN SEMI
     ;
 
 var_decl
@@ -40,7 +46,7 @@ var_decl
     ;
 
 var_assign
-    : ID ASSIGN expression SEMI
+    : ID (ASSIGN | PLUS_ASSIGN | MINUS_ASSIGN | MULT_ASSIGN | DIV_ASSIGN) expression SEMI
     ;
 
 return_statement
@@ -85,10 +91,16 @@ expression
     | literal
     | ID
     | function_call
+    | method_call
     | ID LBRACKET expression RBRACKET         
+    | LBRACKET list_elements? RBRACKET        // array/list literal: [1, 2, 3]
     ;
 function_call
     : ID LPAREN argument_list? RPAREN
+    ;
+
+method_call
+    : ID DOT ID LPAREN argument_list? RPAREN
     ;
 
 argument_list
